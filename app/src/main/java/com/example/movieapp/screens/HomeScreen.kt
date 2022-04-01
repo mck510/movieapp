@@ -2,6 +2,7 @@ package com.example.movieapp.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -12,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.movieapp.widgets.MovieRow
-
 import com.example.testapp.models.Movie
+
 import com.example.testapp.models.getMovies
 
 @Composable
@@ -23,7 +24,7 @@ fun HomeScreen(navController: NavController = rememberNavController()){
 
 
 @Composable
-fun MainContent(navController: () -> Unit, movieList: () -> Unit = getMovies()) {
+fun MainContent(navController: NavController, movieList: List<Movie> = getMovies()) {
     var showMenu by remember {
         mutableStateOf(false)
     }
