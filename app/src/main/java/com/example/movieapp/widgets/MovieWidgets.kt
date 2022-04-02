@@ -5,6 +5,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +32,7 @@ import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import com.example.movieapp.R
 import com.example.testapp.models.Movie
+import com.example.testapp.models.getMovies
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -121,3 +124,26 @@ fun MovieRow(
         }
     }
 }
+
+@Composable
+fun HorizontalScrollableImageView(movie: Movie = getMovies()[0]){
+
+    LazyRow{
+        items(movie.images){ image ->
+            Card(modifier = Modifier.padding(8.dp).height(200.dp),
+            elevation = 4.dp) {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(image)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = "Movie Image",
+                    contentScale = ContentScale.FillBounds,
+                    //modifier = Modifier.clip(CircleShape)
+                )
+            }
+        }
+    }
+
+}
+

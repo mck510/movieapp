@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.movieapp.widgets.HorizontalScrollableImageView
 import com.example.movieapp.widgets.MovieRow
 import com.example.testapp.models.Movie
 import com.example.testapp.models.getMovies
@@ -23,6 +24,10 @@ fun DetailScreen(movieId: String?,navController: NavController = rememberNavCont
     val movie = filterMovie(movieId = movieId)
 
     MainContent(movie.title, navController= navController) {
+Surface(modifier = Modifier
+    .fillMaxWidth()
+    .fillMaxHeight()) {
+
 
         Column(modifier = Modifier
             .padding(9.dp))
@@ -33,9 +38,12 @@ fun DetailScreen(movieId: String?,navController: NavController = rememberNavCont
 
         Spacer(modifier = Modifier.height(8.dp))
         Divider()
-        Text(text = movie.title, style = MaterialTheme.typography.h5)
+        Text(text = "Movie Images", style = MaterialTheme.typography.h5)
+        HorizontalScrollableImageView(movie = movie)
+
 
            }
+    }
     }
 }
 
