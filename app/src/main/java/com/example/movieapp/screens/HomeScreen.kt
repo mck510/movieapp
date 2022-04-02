@@ -62,6 +62,7 @@ fun MainContent(navController: NavController, movieList: List<Movie> = getMovies
                 MovieRow(movie,onItemClick = {movieId ->
                     navController.navigate("detailscreen/$movieId")
                     //Log.d("HomeScreen","$movieId")
+                    //test
                 })
             }
         }
