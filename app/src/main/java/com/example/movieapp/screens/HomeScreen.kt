@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.movieapp.Navigation.MovieScreens
 import com.example.movieapp.widgets.MovieRow
 import com.example.testapp.models.Movie
 
@@ -59,11 +60,11 @@ fun MainContent(navController: NavController, movieList: List<Movie> = getMovies
 
         LazyColumn {
             items(movieList) { movie ->
-                MovieRow(movie,onItemClick = {movieId ->
-                    navController.navigate("detailscreen/$movieId")
+                MovieRow(movie = movie) {movieId ->
+                    navController.navigate(MovieScreens.DetailScreen.name+"/$movieId")
                     //Log.d("HomeScreen","$movieId")
                     //test
-                })
+                }
             }
         }
     }
