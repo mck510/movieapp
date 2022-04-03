@@ -62,8 +62,8 @@ fun MainContent(navController: NavController, movieList: List<Movie> = getMovies
 
         LazyColumn {
             items(movieList) { movie ->
-                MovieRow(movie = movie) {movieId ->
-                    navController.navigate(MovieScreens.DetailScreen.name+"/$movieId")
+                MovieRow(movie = movie) { movieId ->
+                    navController.navigate(MovieScreens.DetailScreen.name + "/$movieId")
                     //Log.d("HomeScreen","$movieId")
                     //test
                 }

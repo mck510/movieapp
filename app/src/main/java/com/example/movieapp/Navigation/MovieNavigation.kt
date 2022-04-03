@@ -13,21 +13,24 @@ import com.example.movieapp.screens.HomeScreen
 import com.example.movieapp.screens.FavoritesScreen
 
 @Composable
-fun MovieNavigation(){
+fun MovieNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = MovieScreens.HomeScreen.name){
-        composable(MovieScreens.HomeScreen.name){
+    NavHost(navController = navController, startDestination = MovieScreens.HomeScreen.name) {
+        composable(MovieScreens.HomeScreen.name) {
             HomeScreen(navController = navController)
         }
-        composable(route = MovieScreens.DetailScreen.name+"/{movieId}",
-                arguments = listOf(navArgument("movieId"){
-                    type = NavType.StringType
-                })
-            ) {backStackEntry ->
-            DetailScreen(movieId = backStackEntry.arguments?.getString("movieId"),navController = navController)
+        composable(
+            route = MovieScreens.DetailScreen.name + "/{movieId}",
+            arguments = listOf(navArgument("movieId") {
+                type = NavType.StringType
+            })
+        ) { backStackEntry ->
+            DetailScreen(
+                movieId = backStackEntry.arguments?.getString("movieId"),
+                navController = navController
+            )
         }
-        composable(route = MovieScreens.FavoritesScreen.name){
-                backStackEntry ->
+        composable(route = MovieScreens.FavoritesScreen.name) { backStackEntry ->
             FavoritesScreen(navController = navController)
         }
     }

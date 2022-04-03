@@ -55,9 +55,11 @@ fun MovieRow(
         shape = RoundedCornerShape(corner = CornerSize(16.dp)), elevation = 6.dp
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Surface(modifier = Modifier
-                .size(100.dp)
-                .padding(10.dp)) {
+            Surface(
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(10.dp)
+            ) {
                 //Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Movie Image")
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
@@ -126,12 +128,16 @@ fun MovieRow(
 }
 
 @Composable
-fun HorizontalScrollableImageView(movie: Movie = getMovies()[0]){
+fun HorizontalScrollableImageView(movie: Movie = getMovies()[0]) {
 
-    LazyRow{
-        items(movie.images){ image ->
-            Card(modifier = Modifier.padding(8.dp).height(200.dp),
-            elevation = 4.dp) {
+    LazyRow {
+        items(movie.images) { image ->
+            Card(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .height(200.dp),
+                elevation = 4.dp
+            ) {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(image)

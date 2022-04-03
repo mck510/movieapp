@@ -23,12 +23,17 @@ val movie1 = filterMovie(movieId = "tt2306299")
 val movie2 = filterMovie(movieId = "tt0944947")
 
 @Composable
-fun FavoritesScreen(navController: NavController = rememberNavController(), movieList: List<Movie> = listOf(movie1,movie2)){
+fun FavoritesScreen(
+    navController: NavController = rememberNavController(),
+    movieList: List<Movie> = listOf(movie1, movie2)
+) {
 
-        MainContent(navController= navController) {
-            Surface(modifier = Modifier
+    MainContent(navController = navController) {
+        Surface(
+            modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()) {
+                .fillMaxHeight()
+        ) {
 
 /*
                 Column(modifier = Modifier
@@ -43,46 +48,45 @@ fun FavoritesScreen(navController: NavController = rememberNavController(), movi
                 }
 */
 
-                LazyColumn {
-                    items(movieList) { movie ->
-                        MovieRow(movie = movie) {movieId ->
-                            navController.navigate(MovieScreens.DetailScreen.name+"/$movieId")
-                            //Log.d("HomeScreen","$movieId")
-                            //test
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-
-
-    @Composable
-    fun MainContent(navController: NavController, content: @Composable () -> Unit){
-
-        Scaffold(
-            topBar = {
-                TopAppBar(backgroundColor = Color.Cyan, elevation = 3.dp){
-                    Row{
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "ArrowBack",
-                            modifier = Modifier.clickable {
-                                navController.popBackStack()
-                                //navController.navigate(MovieScreens.HomeScreen.name)
-                            })
-
-                        Spacer(modifier = Modifier.width(28.dp))
-
-                        Text(text = "Favorites")
+            LazyColumn {
+                items(movieList) { movie ->
+                    MovieRow(movie = movie) { movieId ->
+                        navController.navigate(MovieScreens.DetailScreen.name + "/$movieId")
+                        //Log.d("HomeScreen","$movieId")
+                        //test
                     }
                 }
             }
 
-        ) {
-            content()
-
-
         }
     }
+}
+
+
+@Composable
+fun MainContent(navController: NavController, content: @Composable () -> Unit) {
+
+    Scaffold(
+        topBar = {
+            TopAppBar(backgroundColor = Color.Cyan, elevation = 3.dp) {
+                Row {
+                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "ArrowBack",
+                        modifier = Modifier.clickable {
+                            navController.popBackStack()
+                            //navController.navigate(MovieScreens.HomeScreen.name)
+                        })
+
+                    Spacer(modifier = Modifier.width(28.dp))
+
+                    Text(text = "Favorites")
+                }
+            }
+        }
+
+    ) {
+        content()
+
+
+    }
+}
 
