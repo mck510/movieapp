@@ -10,7 +10,7 @@ import androidx.navigation.navArgument
 import com.example.movieapp.Navigation.MovieScreens
 import com.example.movieapp.screens.DetailScreen
 import com.example.movieapp.screens.HomeScreen
-
+import com.example.movieapp.screens.FavoritesScreen
 
 @Composable
 fun MovieNavigation(){
@@ -25,6 +25,10 @@ fun MovieNavigation(){
                 })
             ) {backStackEntry ->
             DetailScreen(movieId = backStackEntry.arguments?.getString("movieId"),navController = navController)
+        }
+        composable(route = MovieScreens.FavoritesScreen.name){
+                backStackEntry ->
+            FavoritesScreen(navController = navController)
         }
     }
 }

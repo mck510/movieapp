@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.movieapp.Navigation.MovieScreens
 import com.example.movieapp.widgets.HorizontalScrollableImageView
 import com.example.movieapp.widgets.MovieRow
 import com.example.testapp.models.Movie
@@ -24,9 +25,9 @@ fun DetailScreen(movieId: String?,navController: NavController = rememberNavCont
     val movie = filterMovie(movieId = movieId)
 
     MainContent(movie.title, navController= navController) {
-Surface(modifier = Modifier
-    .fillMaxWidth()
-    .fillMaxHeight()) {
+    Surface(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()) {
 
 
         Column(modifier = Modifier
@@ -40,8 +41,6 @@ Surface(modifier = Modifier
         Divider()
         Text(text = "Movie Images", style = MaterialTheme.typography.h5)
         HorizontalScrollableImageView(movie = movie)
-
-
            }
     }
     }
@@ -60,7 +59,6 @@ fun MainContent(movieTitle: String, navController: NavController, content: @Comp
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "ArrowBack",
                     modifier = Modifier.clickable {
                         navController.popBackStack()
-                        //TODO goBack
 
                     })
 

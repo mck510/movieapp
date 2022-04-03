@@ -38,7 +38,9 @@ fun MainContent(navController: NavController, movieList: List<Movie> = getMovies
                     Icon(imageVector = Icons.Default.MoreVert, contentDescription = "More")
                 }
                 DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
-                    DropdownMenuItem(onClick = { /*TODO*/ }) {
+                    DropdownMenuItem(onClick = {
+                        navController.navigate(MovieScreens.FavoritesScreen.name)
+                    }) {
                         Icon(
                             imageVector = Icons.Default.Favorite, contentDescription = "Favorites",
                             modifier = Modifier
