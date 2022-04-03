@@ -16,48 +16,42 @@ import androidx.navigation.compose.rememberNavController
 import com.example.movieapp.Navigation.MovieScreens
 import com.example.movieapp.widgets.HorizontalScrollableImageView
 import com.example.movieapp.widgets.MovieRow
+import com.example.testapp.models.Movie
+import com.example.testapp.models.getMovies
+
+val movie1 = filterMovie(movieId = "tt2306299")
+val movie2 = filterMovie(movieId = "tt0944947")
 
 @Composable
-fun FavoritesScreen(navController: NavController = rememberNavController()){
-
-    val movie1 = filterMovie(movieId = "tt2306299")
-    val movie2 = filterMovie(movieId = "tt0944947")
+fun FavoritesScreen(navController: NavController = rememberNavController(), movieList: List<Movie> = listOf(movie1,movie2)){
 
         MainContent(navController= navController) {
             Surface(modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()) {
 
-
+/*
                 Column(modifier = Modifier
                     .padding(9.dp))
                 {
-
-
                     MovieRow(movie = movie1) { movieId ->
                         navController.navigate(MovieScreens.DetailScreen.name + "/$movieId")
-
                     }
                     MovieRow(movie = movie2) { movieId ->
                         navController.navigate(MovieScreens.DetailScreen.name + "/$movieId")
-
                     }
-
-
                 }
+*/
 
-
-                /*
-
-                Column(modifier = Modifier
-                    .padding(9.dp))
-                {
-
-                    MovieRow(movie = movie1)
-                    MovieRow(movie = movie2)
+                LazyColumn {
+                    items(movieList) { movie ->
+                        MovieRow(movie = movie) {movieId ->
+                            navController.navigate(MovieScreens.DetailScreen.name+"/$movieId")
+                            //Log.d("HomeScreen","$movieId")
+                            //test
+                        }
+                    }
                 }
-                */
-
 
             }
         }
