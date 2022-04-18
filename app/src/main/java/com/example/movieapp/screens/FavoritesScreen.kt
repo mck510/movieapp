@@ -1,5 +1,6 @@
 package com.example.movieapp.screens
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,10 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.movieapp.Navigation.MovieScreens
-import com.example.movieapp.widgets.HorizontalScrollableImageView
+import com.example.movieapp.viewmodels.FavoritesViewModel
 import com.example.movieapp.widgets.MovieRow
 import com.example.testapp.models.Movie
-import com.example.testapp.models.getMovies
 
 val movie1 = filterMovie(movieId = "tt2306299")
 val movie2 = filterMovie(movieId = "tt0944947")
@@ -25,16 +25,18 @@ val movie2 = filterMovie(movieId = "tt0944947")
 @Composable
 fun FavoritesScreen(
     navController: NavController = rememberNavController(),
-    movieList: List<Movie> = listOf(movie1, movie2)
+    movieList: List<Movie>,// = listOf(movie1, movie2),
+    viewModel: FavoritesViewModel
 ) {
-
     MainContent(navController = navController) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-
+            Log.d("FavoriteScreen", "test")
+            //viewModel.addFavorite(movie1)
+            //var list = viewModel.getFavorites()
 /*
                 Column(modifier = Modifier
                     .padding(9.dp))
@@ -50,18 +52,18 @@ fun FavoritesScreen(
 
             LazyColumn {
                 items(movieList) { movie ->
-                    MovieRow(movie = movie) { movieId ->
+                    MovieRow(movie = movie, viewModel, false) { movieId ->
                         navController.navigate(MovieScreens.DetailScreen.name + "/$movieId")
+
                         //Log.d("HomeScreen","$movieId")
                         //test
                     }
                 }
-            }
 
+            }
         }
     }
 }
-
 
 @Composable
 fun MainContent(navController: NavController, content: @Composable () -> Unit) {

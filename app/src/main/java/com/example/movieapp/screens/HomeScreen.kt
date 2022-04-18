@@ -13,19 +13,19 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.movieapp.Navigation.MovieScreens
+import com.example.movieapp.viewmodels.FavoritesViewModel
 import com.example.movieapp.widgets.MovieRow
-import com.example.testapp.models.Movie
-
 import com.example.testapp.models.getMovies
 
 @Composable
-fun HomeScreen(navController: NavController = rememberNavController()){
-    MainContent(navController = navController)
+fun HomeScreen(navController: NavController = rememberNavController(),viewModel:FavoritesViewModel){
+    MainContent(navController = navController,viewModel)
+
 }
 
 
 @Composable
-fun MainContent(navController: NavController, movieList: List<Movie> = getMovies()) {
+fun MainContent(navController: NavController, viewModel:FavoritesViewModel ) {
     var showMenu by remember {
         mutableStateOf(false)
     }
@@ -61,9 +61,16 @@ fun MainContent(navController: NavController, movieList: List<Movie> = getMovies
     ) {
 
         LazyColumn {
-            items(movieList) { movie ->
-                MovieRow(movie = movie) { movieId ->
+            items(getMovies()) { movie ->
+                MovieRow(
+                    movie = movie,
+                    viewModel = viewModel,
+                    icon = true
+                ) /*{
+                    FavoriteImageButton(movie = movie, viewModel = viewModel)
+                }*/{ movieId ->
                     navController.navigate(MovieScreens.DetailScreen.name + "/$movieId")
+
                     //Log.d("HomeScreen","$movieId")
                     //test
                 }

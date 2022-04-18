@@ -6,13 +6,12 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.movieapp.Navigation.MovieScreens
+import com.example.movieapp.viewmodels.FavoritesViewModel
 import com.example.movieapp.widgets.HorizontalScrollableImageView
 import com.example.movieapp.widgets.MovieRow
 import com.example.testapp.models.Movie
@@ -20,7 +19,7 @@ import com.example.testapp.models.getMovies
 
 
 @Composable
-fun DetailScreen(movieId: String?, navController: NavController = rememberNavController()) {
+fun DetailScreen(movieId: String?, navController: NavController = rememberNavController(),viewModel: FavoritesViewModel) {
 
     val movie = filterMovie(movieId = movieId)
 
@@ -35,7 +34,8 @@ fun DetailScreen(movieId: String?, navController: NavController = rememberNavCon
            {
 
 
-        MovieRow(movie = movie)
+        MovieRow(
+            movie = movie,viewModel,true)
 
         Spacer(modifier = Modifier.height(8.dp))
         Divider()
